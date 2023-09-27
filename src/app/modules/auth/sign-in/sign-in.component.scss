@@ -1,0 +1,27 @@
+@import "../../../../assets/styles/variables.scss";
+
+:host {
+  width: 30%;
+}
+
+.mat-mdc-card {
+  .mat-mdc-card-content {
+    padding: 50px 20px 0 20px;
+    .formWrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+  .mat-mdc-card-footer {
+    padding: 10px;
+    a {
+      color: $text-link;
+      text-decoration: none;
+    }
+  }
+}
+
+.submit-btn {
+  margin: 0 auto;
+}

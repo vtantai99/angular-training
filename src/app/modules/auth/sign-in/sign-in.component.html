@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Sign In</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form
+      class="formWrapper"
+      [formGroup]="signInForm"
+      #formDirective="ngForm"
+      (ngSubmit)="onSubmit(signInForm, formDirective)"
+    >
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="User name *"
+          formControlName="userName"
+        />
+        <mat-error *ngIf="checkValidation('userName')">
+          {{ getUserNameErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Password *"
+          formControlName="password"
+        />
+        <mat-error *ngIf="checkValidation('password')">
+          {{ getPasswordErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+      <button class="submit-btn" mat-raised-button color="primary" type="submit">SIGN IN</button>
+    </form>
+  </mat-card-content>
+  <mat-card-footer align="end">
+    Do not have an account?
+    <a routerLink="/sign-up">Sign Up</a>
+  </mat-card-footer>
+</mat-card>

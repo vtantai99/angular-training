@@ -1,0 +1,93 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Sign Up</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form
+      class="formWrapper"
+      [formGroup]="signInForm"
+      #formDirective="ngForm"
+      (ngSubmit)="onSubmit(signInForm, formDirective)"
+    >
+      <mat-form-field>
+        <input
+          type="email"
+          matInput
+          placeholder="Email *"
+          formControlName="email"
+        />
+        <mat-error *ngIf="checkValidation('email')">
+          {{ getEmailErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="User name *"
+          formControlName="userName"
+        />
+        <mat-error *ngIf="checkValidation('userName')">
+          {{ getUserNameErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Password *"
+          formControlName="password"
+          (input)="onPasswordInput()"
+        />
+        <mat-error *ngIf="checkValidation('password')">
+          {{ getPasswordErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Confirm password *"
+          formControlName="confirmPassword"
+          (input)="onPasswordInput()"
+        />
+        <mat-error *ngIf="confirmPassword?.hasError('required')"
+          >Confirm password is required</mat-error
+        >
+        <mat-error
+          *ngIf="
+            confirmPassword?.invalid && !confirmPassword?.hasError('required')
+          "
+          >Confirm password don't match</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Full name *"
+          formControlName="fullName"
+        />
+        <mat-error *ngIf="checkValidation('fullName')">
+          {{ getFullNameErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Phone number*"
+          formControlName="phoneNumber"
+        />
+        <mat-error *ngIf="checkValidation('phoneNumber')">
+          {{ getPhoneNumberErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+      <button class="submit-btn" mat-raised-button color="primary" type="submit">SIGN UP</button>
+    </form>
+  </mat-card-content>
+  <mat-card-footer align="end">
+    Do you have any accounts?
+    <a routerLink="/sign-in">Sign In</a>
+  </mat-card-footer>
+</mat-card>
