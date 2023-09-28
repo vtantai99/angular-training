@@ -1,0 +1,33 @@
+footer {
+  padding-bottom: 100px;
+  background-image: url("../../../../assets/images/wall.jpeg");
+
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 100px;
+    background-color: #FDFCF0;
+    img {
+      height: 30px;
+    }
+    .description-wrapper {
+      p {
+        margin: 0;
+        line-height: 20px;
+        color: #636363;
+        &:first-child {
+          font-size: 14px;
+          font-weight: bold;
+        }
+        &:not(:first-child) {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+.wall {
+  width: 100%;
+}
