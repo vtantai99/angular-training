@@ -1,21 +1,22 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthModule } from './modules/auth/auth.module';
-import { FooterComponent } from './shared/components/footer/footer.component';
-import { HeaderComponent } from './shared/components/header/header.component';
+import { LayoutModule } from './shared/layout/layout.module';
+import { ModulesModule } from './modules/modules.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent],
+  declarations: [AppComponent],
   imports: [
     AppRoutingModule,
-    AuthModule,
+    ModulesModule,
     BrowserAnimationsModule,
     BrowserModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

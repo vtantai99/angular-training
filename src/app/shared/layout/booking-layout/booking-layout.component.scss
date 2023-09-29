@@ -2,6 +2,9 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  .header {
+    width: 75%;
+  }
   .children {
     flex: 1;
   }

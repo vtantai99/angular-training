@@ -1,0 +1,87 @@
+<div class="wrapper">
+  <div class="info">
+    <img class="info__img" src="" alt="" />
+    <div class="info__content">
+      <p class="info__content--location">BHD Star Cineplex - Phạm Hùng</p>
+      <p class="info__content--sub-location">
+        L4-Satra Phạm Hùng, C6/27 Phạm Hùng, Bình Chánh - Rạp 5
+      </p>
+    </div>
+  </div>
+  <img
+    class="screen"
+    src="../../../../assets/images/screen-shadow.png"
+    alt="screen-shadow"
+  />
+
+  <div class="main">
+    <div class="seatRow" *ngFor="let seatRow of getSeats()">
+      <span class="seatRow__name">{{ seatRow.rowName }}</span>
+      <div class="seatRow__seats">
+        <button
+          class="seatRow__seats--seat"
+          *ngFor="let seat of seatRow.seats; let i = index"
+          mat-raised-button
+          color="primary"
+          (click)="getSeats()"
+        >
+          {{ seatRow.rowName + i }}
+        </button>
+      </div>
+    </div>
+    <div class="seatHint">
+      <div class="seatHint__item" *ngFor="let seatHint of seatsHint">
+        <div [ngSwitch]="seatHint.name">
+          <span
+            *ngSwitchCase="'Selected Seat'"
+            [ngStyle]="{ 'background-color': seatHint.color }"
+            class="seatHint__item--seat"
+          >
+            <mat-icon class="close-icon">close</mat-icon>
+          </span>
+          <span
+            *ngSwitchDefault
+            [ngStyle]="{ 'background-color': seatHint.color }"
+            class="seatHint__item--seat"
+          >
+          </span>
+        </div>
+
+        <span>{{ seatHint.name }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <p class="sidebar__price">$0</p>
+  <mat-divider></mat-divider>
+  <div class="sidebar__item">
+    <span>Movie's name:</span>
+    <strong>John Wick 4</strong>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="sidebar__item">
+    <span>Showtime:</span>
+    <strong>01:01 - 01/01/2024</strong>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="sidebar__item">
+    <span>Location:</span>
+    <strong>BHD Star Cinplex - Phạm Hùng</strong>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="sidebar__item">
+    <span>Seats:</span>
+    <strong>B1, B2</strong>
+  </div>
+  <button
+    class="pay-btn"
+    mat-raised-button
+    color="primary"
+    (click)="getSeats()"
+  >
+    PAY
+  </button>
+</div>
