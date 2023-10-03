@@ -9,7 +9,7 @@ import { ModulesModule } from './modules/modules.module';
 import { LayoutModule } from './shared/layout/layout.module';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { AuthState } from './core/store';
+import { AuthState, MovieState } from './core/store';
 import { AuthGuard } from './core/guards';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
@@ -22,7 +22,7 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
     BrowserModule,
     LayoutModule,
     HttpClientModule,
-    NgxsModule.forRoot([AuthState]),
+    NgxsModule.forRoot([AuthState, MovieState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
       key: ['auth.accessToken', 'auth.userLoggedIn.data'],

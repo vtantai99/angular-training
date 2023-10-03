@@ -1,27 +1,29 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { Movie, MovieStateModel } from 'src/app/core/models';
+import { GetMovies, MovieState } from 'src/app/core/store';
 import Swiper, { EffectCoverflow, Navigation, Pagination } from 'swiper';
-import { SwiperOptions } from 'swiper/types';
 
-
-Swiper.use([Navigation, Pagination, EffectCoverflow])
+Swiper.use([Navigation, Pagination, EffectCoverflow]);
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
+export class HomeComponent implements OnInit {
 
+  @Select(MovieState.movies) movies$!: Observable<MovieStateModel['movies']>
+  constructor(private store: Store, private router: Router) {}
 
-export class HomeComponent {
+  ngOnInit(): void {
+    this.store.dispatch(new GetMovies());
+  }
 
-  swiperConfig: SwiperOptions = {
-    // Cấu hình Swiper ở đây
-    slidesPerView: 2,
-    // spaceBetween: 20,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
-    }
-  };
+  goToBooking(showTimeCode: Movie['maChieuPhim']) {
+    this.router.navigateByUrl(`/booking/${showTimeCode}`)
+  }
 }

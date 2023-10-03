@@ -1,4 +1,7 @@
 <mat-toolbar>
+  <button (click)="goPlaces('/')" mat-mini-fab color="warn" aria-label="Home icon">
+    <mat-icon>home</mat-icon>
+  </button>
   OWT Cinema
   <span class="example-spacer"></span>
   <div class="user-wrapper" *ngIf="(isLoggedIn$ | async); else notLoggedIn">
@@ -8,7 +11,6 @@
       Sign out
     </button>
   </div>
-
   <ng-template #notLoggedIn>
     <button mat-button color="primary" (click)="goPlaces('/auth')">
       Sign in

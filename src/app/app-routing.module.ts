@@ -21,7 +21,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'booking',
+    path: 'booking/:showTimeCode',
     component: BookingLayoutComponent,
     children: [
       {

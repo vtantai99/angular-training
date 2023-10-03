@@ -1,36 +1,29 @@
 <div class="slider-effectCoverflow">
+  <p class="title">Now Showing</p>
   <swiper
-  [navigation]="true"
-  [effect]="'coverflow'"
-  [grabCursor]="true"
-  [centeredSlides]="true"
-  [slidesPerView]="2"
-  [coverflowEffect]="{
-    rotate: 50,
-    stretch: 0,
-    depth: 100,
-    modifier: 1,
-    slideShadows: true
-  }"
-  [loop]="true"
->
-  <ng-template swiperSlide>
-    <img src="https://picsum.photos/200/300" alt="nothing" />
-  </ng-template>
-  <ng-template swiperSlide
-    ><img src="https://picsum.photos/200/300" alt="nothing"
-  /></ng-template>
-  <ng-template swiperSlide
-    ><img src="https://picsum.photos/200/300" alt="nothing"
-  /></ng-template>
-  <ng-template swiperSlide
-    ><img src="https://picsum.photos/200/300" alt="nothing"
-  /></ng-template>
-  <ng-template swiperSlide
-    ><img src="https://picsum.photos/200/300" alt="nothing"
-  /></ng-template>
-  <ng-template swiperSlide
-    ><img src="https://picsum.photos/200/300" alt="nothing"
-  /></ng-template>
-</swiper>
+    [navigation]="true"
+    [effect]="'coverflow'"
+    [grabCursor]="true"
+    [centeredSlides]="true"
+    [slidesPerView]="2"
+    [coverflowEffect]="{
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true
+    }"
+    [loop]="true"
+    [initialSlide]="1"
+  >
+    <ng-template swiperSlide *ngFor="let movie of (movies$ | async)?.data">
+      <img [src]="movie.hinhAnh" [alt]="movie.biDanh" />
+      <div class="footer">
+        <p class="footer__name">{{ movie.tenPhim }}</p>
+        <button [disabled]="!movie.maChieuPhim" class="footer__booking-btn" mat-raised-button color="warn" (click)="goToBooking(movie.maChieuPhim)">
+          {{ movie.maChieuPhim ? 'Booking' : 'Canceled' }}
+        </button>
+      </div>
+    </ng-template>
+  </swiper>
 </div>

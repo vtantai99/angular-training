@@ -7,8 +7,9 @@ import { FooterComponent } from '../components/footer/footer.component';
 import { HeaderComponent } from '../components/header/header.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { DefaultLayoutComponent } from './default-layout/default-layout.component';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
 import { BookingLayoutComponent } from './booking-layout/booking-layout.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,13 @@ import { BookingLayoutComponent } from './booking-layout/booking-layout.componen
     DefaultLayoutComponent,
     BookingLayoutComponent,
   ],
-  imports: [CommonModule, RouterModule, MatToolbarModule, MatButtonModule, MatDividerModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+  ],
 })
 export class LayoutModule {}
