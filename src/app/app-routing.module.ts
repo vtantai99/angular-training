@@ -7,10 +7,11 @@ import { AuthLayoutComponent } from './shared/layout/auth-layout/auth-layout.com
 import { DefaultLayoutComponent } from './shared/layout/default-layout/default-layout.component';
 import { BookingComponent } from './modules/movie/booking/booking.component';
 import { BookingLayoutComponent } from './shared/layout/booking-layout/booking-layout.component';
+import { AuthGuard, LoggedInGuard } from './core/guards';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: DefaultLayoutComponent,
     children: [
       {
@@ -20,29 +21,32 @@ const routes: Routes = [
     ],
   },
   {
-    path: '',
+    path: 'booking',
     component: BookingLayoutComponent,
     children: [
       {
-        path: 'booking',
+        path: '',
         component: BookingComponent,
       },
     ],
+    canActivate: [AuthGuard],
   },
   {
-    path: '',
+    path: 'auth',
     component: AuthLayoutComponent,
+    canActivate: [LoggedInGuard],
     children: [
+      {
+        path: '',
+        component: SignInComponent,
+      },
       {
         path: 'sign-up',
         component: SignUpComponent,
       },
-      {
-        path: 'sign-in',
-        component: SignInComponent,
-      },
     ],
   },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -102,8 +102,7 @@ export class SignUpComponent {
   onSubmit(formData: FormGroup, formDirective: FormGroupDirective) {
     const { value, status } = formData;
     if (status === 'VALID') {
-      // formDirective.resetForm();
-      console.log('Tai Vo 🚀 ~ formData:', formData);
+      // formDirective.resetForm();;
     }
   }
 }

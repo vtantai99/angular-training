@@ -1,35 +1,40 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { AuthStateModel } from 'src/app/core/models';
+import { AuthState, SignIn } from 'src/app/core/store';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent {
   signInForm: FormGroup;
+  @Select(AuthState.userLoggedIn) userLoggedIn$!: Observable<AuthStateModel['userLoggedIn']>;
 
-  constructor() {
-    this.signInForm = new FormGroup(
-      {
-        userName: new FormControl('', [Validators.required]),
-        password: new FormControl('', [
-          Validators.required,
-        ]),
-      }
-    );
+
+  constructor(private store: Store) {
+    this.signInForm = new FormGroup({
+      taiKhoan: new FormControl('', [Validators.required]),
+      matKhau: new FormControl('', [Validators.required]),
+    });
   }
 
   getUserNameErrorMessage() {
-    if (this.signInForm.get('userName')?.hasError('required')) {
+    if (this.signInForm.get('taiKhoan')?.hasError('required')) {
       return 'User name is required';
     }
     return '';
   }
 
   getPasswordErrorMessage() {
-    if (this.signInForm.get('password')?.hasError('required')) {
+    if (this.signInForm.get('matKhau')?.hasError('required')) {
       return 'Password is required';
     }
     return '';
@@ -39,10 +44,10 @@ export class SignInComponent {
     return this.signInForm.get(input)?.invalid;
   }
 
-  onSubmit(formData: FormGroup, formDirective: FormGroupDirective) {
-    const { value, status } = formData;
+  onSubmit(formData: FormGroup,) {
+    const { value: user, status } = formData;
     if (status === 'VALID') {
-      // formDirective.resetForm();
+      this.store.dispatch(new SignIn(user));
     }
   }
 }

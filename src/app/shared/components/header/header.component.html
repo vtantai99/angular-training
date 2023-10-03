@@ -1,7 +1,21 @@
 <mat-toolbar>
-  OWT Theater
+  OWT Cinema
   <span class="example-spacer"></span>
-  <button mat-button color="primary" (click)="goPlaces('/sign-in')">Sign in</button>
-  <mat-divider vertical></mat-divider>
-  <button mat-button color="accent" (click)="goPlaces('/sign-up')">Sign up</button>
+  <div class="user-wrapper" *ngIf="(isLoggedIn$ | async); else notLoggedIn">
+    <span>Hello, {{ (userLoggedIn$ | async)?.data?.hoTen }}</span>
+    <mat-divider vertical class="user-wrapper__divider"></mat-divider>
+    <button mat-button color="accent" (click)="signOut()">
+      Sign out
+    </button>
+  </div>
+
+  <ng-template #notLoggedIn>
+    <button mat-button color="primary" (click)="goPlaces('/auth')">
+      Sign in
+    </button>
+    <mat-divider vertical class="divider-vertical"></mat-divider>
+    <button mat-button color="accent" (click)="goPlaces('/auth/sign-up')">
+      Sign up
+    </button>
+  </ng-template>
 </mat-toolbar>
