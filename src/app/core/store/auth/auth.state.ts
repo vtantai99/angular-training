@@ -31,6 +31,11 @@ export class AuthState {
     return Boolean(state.accessToken);
   }
 
+  @Selector()
+  static accessToken(state: AuthStateModel) {
+    return state.accessToken;
+  }
+
   // Sign in
   @Action(SignIn)
   signIn(
