@@ -16,13 +16,13 @@ export class MoviesService {
 
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>(this.getMoviesUrl, {
-      params: { maNhom: 'GP02' },
+      params: { maNhom: 'GP09' },
     });
   }
 
   getCinemaShowTimeInfo(): Observable<CinemaShowtime[]> {
     return this.http.get<CinemaShowtime[]>(this.getShowtimeInfoUrl, {
-      params: { maNhom: 'GP02' },
+      params: { maNhom: 'GP09' },
     });
   }
 
