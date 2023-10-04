@@ -21,23 +21,29 @@
   />
 
   <div class="main">
-    <div class="seatRow" *ngFor="let seatRow of getSeatsWithRow()">
-      <span class="seatRow__name">{{ seatRow.rowName }}</span>
-      <div class="seatRow__seats">
-        <button
-          [ngClass]="[getSeatClass(seat), 'seatRow__seats--seat']"
-          *ngFor="let seat of seatRow.seats; let i = index"
-          mat-button
-          [disabled]="seat.daDat"
-          (click)="selectSeat(seat, seatRow.rowName + (i + 1))"
-        >
-          <mat-icon *ngIf="seat.daDat" class="reserved">close</mat-icon>
-          <span class="name">{{
-            seat.daDat ? "" : seatRow.rowName + (i + 1)
-          }}</span>
-        </button>
-      </div>
+    <div class="main__loading" *ngIf="(movieInfo$ | async)?.isLoading; else seats">
+      <mat-spinner></mat-spinner>
     </div>
+    <ng-template #seats>
+      <div class="seatRow" *ngFor="let seatRow of getSeatsWithRow()">
+        <span class="seatRow__name">{{ seatRow.rowName }}</span>
+        <div class="seatRow__seats">
+          <button
+            [ngClass]="[getSeatClass(seat), 'seatRow__seats--seat']"
+            *ngFor="let seat of seatRow.seats; let i = index"
+            mat-button
+            [disabled]="seat.daDat"
+            (click)="selectSeat(seat, seatRow.rowName + (i + 1))"
+          >
+            <mat-icon *ngIf="seat.daDat" class="reserved">close</mat-icon>
+            <span class="name">{{
+              seat.daDat ? "" : seatRow.rowName + (i + 1)
+            }}</span>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
 
     <!-- Hint -->
     <div class="seatHint">

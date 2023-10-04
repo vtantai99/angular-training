@@ -223,6 +223,9 @@ export class MovieState {
             bookingMovie: { ...getState().bookingMovie, error, isLoading: false },
           });
         },
+        complete: () => {
+          alert('Booking tickets successfully')
+        }
       })
     );
   }

@@ -40,6 +40,12 @@
   .main {
     margin: 0 auto;
     width: max-content;
+    &__loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 37.5vh;
+    }
     .seatRow {
       display: flex;
       align-items: center;
