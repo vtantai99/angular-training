@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>Please confirm</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="row">
+    <span class="row__title">Movie's name:</span>
+    <span class="row__content">{{
+      (movieInfo$ | async)?.data?.thongTinPhim?.tenPhim
+    }}</span>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row">
+    <span class="row__title">Showtime:</span>
+    <span class="row__content">{{
+      (movieInfo$ | async)?.data?.thongTinPhim?.gioChieu +
+        " - " +
+        (movieInfo$ | async)?.data?.thongTinPhim?.ngayChieu
+    }}</span>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row">
+    <span class="row__title">Location:</span>
+    <span class="row__content">{{
+      (movieInfo$ | async)?.data?.thongTinPhim?.diaChi
+    }}</span>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row">
+    <span class="row__title">Seats:</span>
+    <div>
+      <span
+        class="row__content"
+        *ngFor="
+          let nameOfSeatsSelecting of namesOfSeatsSelecting$ | async;
+          let i = index
+        "
+      >
+        {{ i === 0 ? nameOfSeatsSelecting : ", " + nameOfSeatsSelecting }}
+      </span>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row">
+    <span class="row__title">Total:</span>
+    <span class="row__content">{{ "$" + (totalToPay$ | async | number) }}</span>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial (click)="bookingMovie()">
+    <mat-icon *ngIf="(bookingMovie$ | async)?.isLoading"
+      ><mat-spinner color="accent" diameter="15"></mat-spinner
+    ></mat-icon>
+    Confirm
+  </button>
+</mat-dialog-actions>

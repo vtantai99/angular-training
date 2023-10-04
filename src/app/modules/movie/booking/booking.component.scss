@@ -56,7 +56,12 @@
           min-width: 30px;
           max-width: 30px;
           height: 30px;
-          font-size: 10px;
+
+          &:hover {
+            .name {
+              opacity: 1;
+            }
+          }
           &.normal {
             background-color: $seat-normal;
           }
@@ -66,10 +71,23 @@
           &.reserved {
             background-color: $seat-reserved;
           }
+          &.selecting {
+            background-color: $seat-selecting;
+            .name {
+              opacity: 1;
+            }
+          }
           .reserved {
             margin-right: 0;
             margin-left: -2px;
             color: white;
+          }
+
+          .name {
+            opacity: 0;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
           }
         }
       }
@@ -120,6 +138,7 @@
     padding: 20px 0;
     display: flex;
     justify-content: space-between;
+    gap: 30px;
     span, strong {
       font-size: 16px;
     }

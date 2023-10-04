@@ -6,15 +6,20 @@ import { SwiperModule } from 'swiper/angular';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './booking/dialog/dialog.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  declarations: [HomeComponent, BookingComponent],
+  declarations: [HomeComponent, BookingComponent, DialogComponent],
   imports: [
     CommonModule,
     SwiperModule,
     MatDividerModule,
     MatButtonModule,
     MatIconModule,
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   bootstrap: [HomeComponent],
 })

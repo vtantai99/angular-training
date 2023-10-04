@@ -9,6 +9,7 @@ export interface Seat {
   giaVe: number;
   daDat: boolean;
   taiKhoanNguoiDat: string | null;
+  dangChon?: boolean;
 }
 
 export interface SeatRow {

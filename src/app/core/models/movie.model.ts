@@ -1,4 +1,5 @@
-import { Seat } from "./seats.model";
+import { User } from './auth.model';
+import { Seat } from './seats.model';
 
 export interface Movie {
   biDanh: string;
@@ -55,6 +56,12 @@ export interface MovieInfo {
 }
 
 export interface MovieInfoWithSeats {
-  thongTinPhim: MovieInfo;
+  thongTinPhim: MovieInfo | Record<string, never>;
   danhSachGhe: Seat[];
+}
+
+export interface BookingPayload {
+  maLichChieu: MovieInfo['maLichChieu'];
+  danhSachVe: { maGhe: Seat['maGhe']; giaVe: Seat['giaVe'] }[];
+  taiKhoanNguoiDung: User['taiKhoan'];
 }

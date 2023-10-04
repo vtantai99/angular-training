@@ -21,7 +21,7 @@
   />
 
   <div class="main">
-    <div class="seatRow" *ngFor="let seatRow of getSeats()">
+    <div class="seatRow" *ngFor="let seatRow of getSeatsWithRow()">
       <span class="seatRow__name">{{ seatRow.rowName }}</span>
       <div class="seatRow__seats">
         <button
@@ -29,9 +29,12 @@
           *ngFor="let seat of seatRow.seats; let i = index"
           mat-button
           [disabled]="seat.daDat"
+          (click)="selectSeat(seat, seatRow.rowName + (i + 1))"
         >
           <mat-icon *ngIf="seat.daDat" class="reserved">close</mat-icon>
-          {{ seat.daDat ? "" : seatRow.rowName + i }}
+          <span class="name">{{
+            seat.daDat ? "" : seatRow.rowName + (i + 1)
+          }}</span>
         </button>
       </div>
     </div>
@@ -62,32 +65,53 @@
 
 <!-- Sidebar -->
 <div class="sidebar">
-  <p class="sidebar__price">$0</p>
+  <p class="sidebar__price">{{ "$" + (totalToPay$ | async | number) }}</p>
   <mat-divider></mat-divider>
   <div class="sidebar__item">
-    <span>Movie's name:</span>
+    <span class="sidebar__item--title">Movie's name:</span>
     <strong>{{ (movieInfo$ | async)?.data?.thongTinPhim?.tenPhim }}</strong>
   </div>
   <mat-divider></mat-divider>
   <div class="sidebar__item">
-    <span>Showtime:</span>
-    <strong>01:01 - 01/01/2024</strong>
+    <span class="sidebar__item--title">Showtime:</span>
+    <strong
+      *ngIf="
+        (movieInfo$ | async)?.data?.thongTinPhim?.gioChieu ||
+        (movieInfo$ | async)?.data?.thongTinPhim?.ngayChieu
+      "
+      >{{
+        (movieInfo$ | async)?.data?.thongTinPhim?.gioChieu +
+          " - " +
+          (movieInfo$ | async)?.data?.thongTinPhim?.ngayChieu
+      }}</strong
+    >
   </div>
   <mat-divider></mat-divider>
   <div class="sidebar__item">
-    <span>Location:</span>
+    <span class="sidebar__item--title">Location:</span>
     <strong>{{ (movieInfo$ | async)?.data?.thongTinPhim?.diaChi }}</strong>
   </div>
   <mat-divider></mat-divider>
   <div class="sidebar__item">
-    <span>Seats:</span>
-    <strong>B1, B2</strong>
+    <span class="sidebar__item--title">Seats:</span>
+    <div>
+      <strong
+        *ngFor="
+          let nameOfSeatsSelecting of namesOfSeatsSelecting$ | async;
+          let i = index
+        "
+        >{{
+          i === 0 ? nameOfSeatsSelecting : ", " + nameOfSeatsSelecting
+        }}</strong
+      >
+    </div>
   </div>
   <button
     class="pay-btn"
     mat-raised-button
     color="primary"
-    (click)="getSeats()"
+    (click)="openDialog()"
+    [disabled]="(namesOfSeatsSelecting$ | async)?.length === 0"
   >
     PAY
   </button>
