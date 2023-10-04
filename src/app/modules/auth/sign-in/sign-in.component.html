@@ -31,16 +31,20 @@
           {{ getPasswordErrorMessage() }}
         </mat-error>
       </mat-form-field>
+      <div class="error-message" *ngIf="!!(userLoggedIn$ | async)?.error?.['error']">
+        <mat-icon>dangerous</mat-icon>
+        <span>{{ (userLoggedIn$ | async)?.error?.['error'] }}</span>
+      </div>
       <button
         class="submit-btn"
         mat-raised-button
         color="primary"
         type="submit"
       >
-        SIGN IN
         <mat-icon *ngIf="(userLoggedIn$ | async)?.isLoading"
           ><mat-spinner color="accent" diameter="15"></mat-spinner
         ></mat-icon>
+        SIGN IN
       </button>
     </form>
   </mat-card-content>

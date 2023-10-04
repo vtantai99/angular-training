@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User, UserSignIn, UserSignUp } from '../../models';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  signIn(userSignIn: UserSignIn) {
+  signIn(userSignIn: UserSignIn): Observable<User> {
     return this.http.post<User>(this.signInUrl, userSignIn);
   }
 

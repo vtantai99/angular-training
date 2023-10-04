@@ -7,11 +7,11 @@ export interface AuthStateModel {
   userLoggedIn: {
     isLoading: boolean;
     data: User | Record<string, never>;
-    error: unknown;
+    error: Record<string, never>;
   };
   signup: {
     isLoading: boolean;
-    error: unknown;
+    error: Record<string, never>;
   };
 }
 

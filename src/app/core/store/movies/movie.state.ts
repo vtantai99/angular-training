@@ -220,7 +220,7 @@ export class MovieState {
         },
         error: (error) => {
           patchState({
-            bookingMovie: { ...getState().bookingMovie, error },
+            bookingMovie: { ...getState().bookingMovie, error, isLoading: false },
           });
         },
       })

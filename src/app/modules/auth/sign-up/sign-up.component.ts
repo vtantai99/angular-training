@@ -1,12 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-useless-escape */
 import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
-  FormGroupDirective,
-  Validators,
+  Validators
 } from '@angular/forms';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { AuthStateModel } from 'src/app/core/models';
+import { AuthState, Signup } from 'src/app/core/store';
 import { matchPassword } from './match-password.validator';
 
 @Component({
@@ -16,8 +17,9 @@ import { matchPassword } from './match-password.validator';
 })
 export class SignUpComponent {
   signInForm: FormGroup;
+  @Select(AuthState.signup) signup$!: Observable<AuthStateModel['signup']>
 
-  constructor() {
+  constructor(private store: Store) {
     this.signInForm = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -99,10 +101,18 @@ export class SignUpComponent {
     return this.signInForm.get(input)?.invalid;
   }
 
-  onSubmit(formData: FormGroup, formDirective: FormGroupDirective) {
+  onSubmit(formData: FormGroup) {
     const { value, status } = formData;
     if (status === 'VALID') {
-      // formDirective.resetForm();;
+      this.store.dispatch(new Signup({
+        taiKhoan: value.userName,
+        matKhau: value.password,
+        email: value.email,
+        soDt: value.phoneNumber,
+        maNhom: 'GP09',
+        maLoaiNguoiDung: 'KhachHang',
+        hoTen: value.fullName
+      }))
     }
   }
 }

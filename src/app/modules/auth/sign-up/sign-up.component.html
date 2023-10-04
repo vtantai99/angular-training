@@ -7,7 +7,7 @@
       class="formWrapper"
       [formGroup]="signInForm"
       #formDirective="ngForm"
-      (ngSubmit)="onSubmit(signInForm, formDirective)"
+      (ngSubmit)="onSubmit(signInForm)"
     >
       <mat-form-field>
         <input
@@ -33,7 +33,7 @@
       </mat-form-field>
       <mat-form-field>
         <input
-          type="text"
+          type="password"
           matInput
           placeholder="Password *"
           formControlName="password"
@@ -45,7 +45,7 @@
       </mat-form-field>
       <mat-form-field>
         <input
-          type="text"
+          type="password"
           matInput
           placeholder="Confirm password *"
           formControlName="confirmPassword"
@@ -83,7 +83,20 @@
           {{ getPhoneNumberErrorMessage() }}
         </mat-error>
       </mat-form-field>
-      <button class="submit-btn" mat-raised-button color="primary" type="submit">SIGN UP</button>
+      <div class="error-message" *ngIf="!!(signup$ | async)?.error?.['error']">
+        <mat-icon>dangerous</mat-icon>
+        <span>{{ (signup$ | async)?.error?.['error'] }}</span>
+      </div>
+      <button
+        class="submit-btn"
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        <mat-icon *ngIf="(signup$ | async)?.isLoading"
+          ><mat-spinner color="accent" diameter="15"></mat-spinner></mat-icon
+        >SIGN UP
+      </button>
     </form>
   </mat-card-content>
   <mat-card-footer align="end">
